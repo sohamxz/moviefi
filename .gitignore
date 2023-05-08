@@ -1,2 +1,4 @@
-node_modules
-s
+/node_modules
+.env
+build
+.env.production
