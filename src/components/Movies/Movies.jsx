@@ -6,8 +6,6 @@ import { useGetMoviesQuery } from '../../services/TMDB';
 import { MovieList } from '..';
 
 function Movies() {
-  const { data } = useGetMoviesQuery(); //fetching data from an API
-  console.log(data);
   const { data, error, isFetching } = useGetMoviesQuery(); //fetching data from an API
 
   if (isFetching) {
