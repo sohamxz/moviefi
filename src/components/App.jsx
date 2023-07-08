@@ -13,18 +13,13 @@ function App() {
     <div className={classes.root}>
       <CssBaseline />
       <Navbar />
-      <main className={classes.content}>
-        {' '}
-        {/*main div contains the main part of the application*/}
+      <main className={classes.content}> { /*main div contains the main part of the application*/ }
         <div className={classes.toolbar} />
-        <Switch>
-          {' '}
-          {/*a <Switch> looks through its children <Route>s and renders the first one that matches the current URL*/}
-          <Route exact path="/movie/:id" element={<MovieInfo />} />{' '}
-          {/*notice: /:id <=> /<number>*/}
+        <Switch> { /*a <Switch> looks through its children <Route>s and renders the first one that matches the current URL*/ }
+          <Route exact path="/movie/:id" element={<MovieInformation />} /> { /*notice: /:id <=> /<number>*/ }
           <Route exact path="/actors/:id" element={<Actors />} />
-          <Route exact path="/" element={<Movies />} />{' '}
-          {/*notice: it's smart to use 'exact'*/}
+          <Route exact path="/*" element={<Movies />} /> { /*notice: it's smart to use 'exact'*/ }
+          <Route exact path="/approved" element={<Movies />} />
           <Route exact path="/profile/:id" element={<Profile />} />
         </Switch>
       </main>
