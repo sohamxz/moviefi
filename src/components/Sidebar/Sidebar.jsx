@@ -2,10 +2,12 @@ import { React, useEffect } from 'react';
 import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 const lightLogo = 'https://fontmeme.com/permalink/230627/ec7d52f2b78ac37568a05991c0265367.png';
 const darkLogo = 'https://fontmeme.com/permalink/230627/20cc84d3636dd4eca67421becdd12430.png';
@@ -16,11 +18,12 @@ const categories = [
   { label: 'Upcoming', value: 'upcoming' },
 ];
 function Sidebar({ setMobileOpen }) {
+  const { genreOrCategory } = useSelector((state) => state.currentGenreOrCategory);
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
-  console.log(data);
-
+  const dispatch = useDispatch(); //allows us to dispatch actions
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory); //will be used later
   return (
     <>
       <Link to="/" className={classes.imageLink}> { /*site logo*/ }
@@ -36,7 +39,7 @@ function Sidebar({ setMobileOpen }) {
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
             <ListItem
-              onClick={() => {}} //will be implemented later
+              onClick={() => dispatch(selectGenreOrCategory(value))} //notice: typeof value === 'string'
               button
             >
 
@@ -60,7 +63,7 @@ function Sidebar({ setMobileOpen }) {
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
               <ListItem
-                onClick={() => {}} //will be implemented later
+                onClick={() => dispatch(selectGenreOrCategory(id))} //notice: typeof id === 'number'
                 button
               >
                 <ListItemIcon>
