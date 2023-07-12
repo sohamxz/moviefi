@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Routes as Switch, Route } from 'react-router-dom';
 
-import { Actors, MovieInfo, Movies, Navbar, Profile } from '.';
-
+import { Actors, MovieInformation, Movies, Navbar, Profile } from '.';
 import useStyles from './styles';
 
 function App() {
